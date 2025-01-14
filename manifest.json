@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Fashion Smart Comparison",
+  "version": "2.1",
+  "description": "Advanced fashion product comparison and insights",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "tabs",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["lib/ProductExtractor.js", "contentScript.js"],
+    "css": ["styles/content.css"],
+    "run_at": "document_idle"
+  }],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["lib/DataStore.js", "styles/*", "images/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
